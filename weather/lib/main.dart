@@ -126,7 +126,7 @@ Widget _temperature() {
 
 Wrap _temperatureForecast() {
   return Wrap(
-      spacing: 10,
+      spacing: 15,
       children: List.generate(8, (int index) {
         return Chip(
           label: Text(
