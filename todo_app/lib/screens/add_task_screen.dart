@@ -43,7 +43,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         children: <Widget>[
           GestureDetector(
             onTap: () => Navigator.pop(context),
-            child: Icon(
+            child: Icon (
               Icons.arrow_back_ios,
               size: 30,
               color: Theme.of(context).primaryColor,
