@@ -9,6 +9,14 @@ class UserProfile extends StatelessWidget {
     MenuRowData(Icons.computer, 'Устройства'),
     MenuRowData(Icons.folder, 'Папка с чатами'),
   ];
+
+  static const List<MenuRowData> secondMenuRow = [
+    MenuRowData(Icons.notifications, 'Уведомления и звуки'),
+    MenuRowData(Icons.privacy_tip, 'Конфиденциальность'),
+    MenuRowData(Icons.date_range, 'Данные и память'),
+    MenuRowData(Icons.brush, 'Оформление'),
+    MenuRowData(Icons.language, 'Язык'),
+  ];
   const UserProfile();
 
   @override
@@ -28,6 +36,8 @@ class UserProfile extends StatelessWidget {
             _UserInfo(),
             const SizedBox(height: 30),
             _MenuWidget(menuRow: menuRow),
+            const SizedBox(height: 30),
+            _MenuWidget(menuRow: secondMenuRow),
           ],
         ),
       ),
@@ -52,13 +62,7 @@ class _MenuWidget extends StatelessWidget {
       width: double.infinity,
       color: Colors.white,
       child: Column(
-        children: menuRow
-            .map(
-              (data) => _MenuWidgetRow(
-                data: data,
-              ),
-            )
-            .toList(),
+        children: menuRow.map((data) => _MenuWidgetRow(data: data)).toList(),
       ),
     );
   }
@@ -76,12 +80,16 @@ class _MenuWidgetRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Row(
+      child: Column(
         children: [
-          Icon(data.icon),
-          SizedBox(width: 16),
-          Expanded(child: Text(data.text)),
-          Icon(Icons.chevron_right),
+          Row(
+            children: [
+              Icon(data.icon),
+              SizedBox(width: 16),
+              Expanded(child: Text(data.text)),
+              Icon(Icons.chevron_right),
+            ],
+          ),
         ],
       ),
     );
