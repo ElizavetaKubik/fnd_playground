@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/widgets/app.dart';
 
 void main() {
-  //runApp(const MyApp());
+  const app = App();
+  runApp(app);
 }
