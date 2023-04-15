@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:telegram_clone/pages/chats_page.dart';
 import 'package:telegram_clone/pages/contact_page.dart';
 import 'package:telegram_clone/theme/colors.dart';
 import 'package:badges/badges.dart' as badges;
@@ -25,7 +26,7 @@ class _RootAppState extends State<RootApp> {
   Widget getBody() {
     return IndexedStack(
       index: pageIndex,
-      children: [
+      children: const [
         ContactPage(),
         Center(
           child: Text(
@@ -33,12 +34,7 @@ class _RootAppState extends State<RootApp> {
             style: TextStyle(color: white),
           ),
         ),
-        Center(
-          child: Text(
-            'Chats',
-            style: TextStyle(color: white),
-          ),
-        ),
+        ChatsPage(),
         Center(
           child: Text(
             'Settings',

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:telegram_clone/theme/colors.dart';
+
+import '../json/contact_json.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -101,7 +102,59 @@ class _ContactPageState extends State<ContactPage> {
           ),
           const SizedBox(height: 10),
           getSectionIcons(),
+          getContactLists(),
         ],
+      ),
+    );
+  }
+
+  Widget getContactLists() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Column(
+        children: List.generate(contactData.length, (index) {
+          return Column(
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(contactData[index]['img']),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        contactData[index]['name'],
+                        style: const TextStyle(
+                            color: white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: 2),
+                      contactData[index]['is_online']
+                          ? const Text(
+                              'online',
+                              style: TextStyle(color: primary),
+                            )
+                          : Text(
+                              contactData[index]['seen'],
+                              style: TextStyle(color: white.withOpacity(0.5)),
+                            ),
+                    ],
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: Divider(
+                  thickness: 1,
+                  color: white.withOpacity(0.15),
+                ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
