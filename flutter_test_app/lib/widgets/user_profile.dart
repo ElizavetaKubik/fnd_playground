@@ -16,6 +16,16 @@ class UserProfile extends StatelessWidget {
     MenuRowData(Icons.date_range, 'Данные и память'),
     MenuRowData(Icons.brush, 'Оформление'),
     MenuRowData(Icons.language, 'Язык'),
+    MenuRowData(Icons.sticky_note_2, 'Стикеры'),
+  ];
+
+  static const List<MenuRowData> thirdMenuRow = [
+    MenuRowData(Icons.lock_clock, 'Apple Watch'),
+  ];
+
+  static const List<MenuRowData> fourthMenuRow = [
+    MenuRowData(Icons.help, 'Помощь'),
+    MenuRowData(Icons.question_answer, 'Вопросы о Telegram'),
   ];
   const UserProfile();
 
@@ -29,15 +39,17 @@ class UserProfile extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
             _UserInfo(),
             const SizedBox(height: 30),
             _MenuWidget(menuRow: menuRow),
             const SizedBox(height: 30),
             _MenuWidget(menuRow: secondMenuRow),
+            const SizedBox(height: 30),
+            _MenuWidget(menuRow: thirdMenuRow),
+            const SizedBox(height: 30),
+            _MenuWidget(menuRow: fourthMenuRow),
           ],
         ),
       ),
@@ -101,22 +113,34 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: Colors.white,
-      child: Column(
-        children: [
-          const SizedBox(height: 30),
-          _AvatarWidget(),
-          const SizedBox(height: 30),
-          _UserNameWidget(),
-          const SizedBox(height: 10),
-          _UserPhoneWidget(),
-          const SizedBox(height: 10),
-          _UserNickNameWidget(),
-          const SizedBox(height: 10),
-        ],
-      ),
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          color: Colors.white,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              _AvatarWidget(),
+              const SizedBox(height: 30),
+              _UserNameWidget(),
+              const SizedBox(height: 10),
+              _UserPhoneWidget(),
+              const SizedBox(height: 10),
+              _UserNickNameWidget(),
+              const SizedBox(height: 10),
+            ],
+          ),
+        ),
+        Positioned(
+          top: 25,
+          right: 25,
+          child: Text(
+            'Изм.',
+            style: TextStyle(color: Colors.blue, fontSize: 17),
+          ),
+        )
+      ],
     );
   }
 }
