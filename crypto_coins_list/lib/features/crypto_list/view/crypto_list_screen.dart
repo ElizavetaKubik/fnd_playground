@@ -1,6 +1,7 @@
 import 'package:crypto_coins_list/repositiries/crypto_coins/crypto_coins_repository.dart';
 import 'package:flutter/material.dart';
 
+import '../../../repositiries/crypto_coins/models/crypto_coin.dart';
 import '../widgets/widgets.dart';
 
 class CryptoListScreen extends StatefulWidget {
@@ -11,6 +12,14 @@ class CryptoListScreen extends StatefulWidget {
 }
 
 class _CryptoListScreenState extends State<CryptoListScreen> {
+  List<CryptoCoin>? _cryptoCoinList;
+
+  @override
+  void initState() {
+    _loadCryptoCoins();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,24 +27,23 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
         title: const Text('Crypto Currencies List'),
         centerTitle: true,
       ),
-      body: ListView.separated(
-        itemCount: 10,
-        separatorBuilder: (context, index) =>
-            const Divider(color: Colors.white24),
-        itemBuilder: (context, index) {
-          const coinName = 'Bitcoin';
-
-          return const CryptoCoinTile(coinName: coinName);
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          CryptoCoinsRepository().getCoinsList();
-        },
-        child: Icon(
-          Icons.download,
-        ),
-      ),
+      body: (_cryptoCoinList == null)
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.separated(
+              padding: const EdgeInsets.only(top: 16),
+              itemCount: _cryptoCoinList!.length,
+              separatorBuilder: (context, index) =>
+                  const Divider(color: Colors.white24),
+              itemBuilder: (context, index) {
+                final coin = _cryptoCoinList![index];
+                return CryptoCoinTile(coin: coin);
+              },
+            ),
     );
+  }
+
+  Future<void> _loadCryptoCoins() async {
+    _cryptoCoinList = await CryptoCoinsRepository().getCoinsList();
+    setState(() {});
   }
 }
