@@ -34,7 +34,7 @@ final dartTheme = ThemeData(
       fontWeight: FontWeight.w700,
       fontSize: 14,
     ),
-    headlineMedium: TextStyle(
+    headlineMedium: const TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w700,
       fontSize: 20,
