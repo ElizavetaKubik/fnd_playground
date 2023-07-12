@@ -1,3 +1,5 @@
+import 'package:crypto_coins_list/repositiries/crypto_coins/crypto_coin.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../repositiries/crypto_coins/models/crypto_coin.dart';
@@ -15,7 +17,7 @@ class CryptoCoinTile extends StatelessWidget {
     final theme = Theme.of(context);
 
     return ListTile(
-      leading: Image.network(coin.imageURL),
+      leading: Image.network(coin.imageUrl),
       trailing: const Icon(Icons.arrow_forward_ios),
       title: Text(
         coin.name,
@@ -26,7 +28,9 @@ class CryptoCoinTile extends StatelessWidget {
         style: theme.textTheme.labelSmall,
       ),
       onTap: () {
-        Navigator.of(context).pushNamed('/coin', arguments: coin.name);
+        // final coinDetails =
+        //     await GetIt.I<AbstractCoinRepository>().getCoinsDetails(coin.name);
+        Navigator.of(context).pushNamed('/coin', arguments: coin);
       },
     );
   }
